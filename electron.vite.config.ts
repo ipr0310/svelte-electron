@@ -1,12 +1,12 @@
-import { defineConfig, externalizeDepsPlugin } from 'electron-vite'
+import { defineConfig, externalizeDepsPlugin, bytecodePlugin } from 'electron-vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
 
 export default defineConfig({
   main: {
-    plugins: [externalizeDepsPlugin()]
+    plugins: [externalizeDepsPlugin(), bytecodePlugin()]
   },
   preload: {
-    plugins: [externalizeDepsPlugin()]
+    plugins: [externalizeDepsPlugin(), bytecodePlugin()]
   },
   renderer: {
     plugins: [svelte()]
