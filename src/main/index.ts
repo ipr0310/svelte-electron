@@ -1,6 +1,7 @@
 import { app, shell, BrowserWindow, Tray, nativeImage, Menu, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
+import { createServer } from './app'
 import icon from '../../resources/icon.png?asset'
 
 function createWindow(): void {
@@ -69,6 +70,8 @@ app.whenReady().then(() => {
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window)
   })
+
+  createServer()
 
   createWindow()
 
