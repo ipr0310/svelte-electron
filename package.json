@@ -1,5 +1,5 @@
 {
-  "name": "electron-app",
+  "name": "todo-list-app",
   "version": "1.0.0",
   "description": "An Electron application with Svelte and TypeScript",
   "main": "./out/main/index.js",
@@ -18,21 +18,27 @@
     "build:unpack": "npm run build && electron-builder --dir",
     "build:win": "npm run build && electron-builder --win",
     "build:mac": "npm run build && electron-builder --mac",
-    "build:linux": "npm run build && electron-builder --linux"
+    "build:linux": "npm run build && electron-builder --linux",
+    "generate": "drizzle-kit generate:sqlite"
   },
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.0",
     "@electron-toolkit/utils": "^3.0.0",
+    "@types/better-sqlite3": "^7.6.9",
+    "better-sqlite3": "^9.4.1",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
+    "drizzle-orm": "^0.29.3",
     "express": "^4.18.2"
   },
   "devDependencies": {
     "@electron-toolkit/eslint-config-prettier": "^2.0.0",
     "@electron-toolkit/eslint-config-ts": "^1.0.1",
     "@electron-toolkit/tsconfig": "^1.0.1",
+    "@electron/rebuild": "^3.6.0",
     "@sveltejs/vite-plugin-svelte": "^3.0.1",
     "@types/node": "^18.19.9",
+    "drizzle-kit": "^0.20.14",
     "electron": "^28.2.0",
     "electron-builder": "^24.9.1",
     "electron-vite": "^2.0.0",

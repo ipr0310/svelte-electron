@@ -1,4 +1,4 @@
-import { NextFunction, Response, Router } from 'express'
+import { NextFunction, Request, Response, Router } from 'express'
 import { getTags } from './service'
 
 const router = Router()
@@ -8,9 +8,9 @@ const router = Router()
  * @route {GET} /api/tags
  * @returns tags true
  */
-router.get('/tags', (_req: Request, res: Response, next: NextFunction) => {
+router.get('/tags', async (_req: Request, res: Response, next: NextFunction) => {
   try {
-    const tags = getTags()
+    const tags = await getTags()
 
     res.json(tags)
   } catch (error) {
