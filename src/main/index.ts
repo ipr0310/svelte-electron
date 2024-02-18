@@ -1,8 +1,9 @@
 import { app, shell, BrowserWindow, Tray, nativeImage, Menu, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-import { createServer } from './app'
+import { runServer } from './app'
 import { createDatabase } from './app/db/create'
+import { Notification } from 'electron'
 import icon from '../../resources/icon.png?asset'
 
 function createWindow(): void {
@@ -33,7 +34,7 @@ function createWindow(): void {
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
     mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
   } else {
-    mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
+    mainWindow.loadURL('http://localhost:5175/')
   }
 }
 
@@ -45,7 +46,14 @@ app.whenReady().then(() => {
   electronApp.setAppUserModelId('com.electron')
 
   // IPC test
-  ipcMain.on('ping', () => console.log('pong'))
+  ipcMain.on('ping', () => {
+    console.log('pong')
+
+    new Notification({
+      title: 'Ping',
+      body: `Pong - ${process.env['ELECTRON_RENDERER_URL']}`
+    }).show()
+  })
 
   // Set Tray Settings
   const contextMenu = Menu.buildFromTemplate([
@@ -74,7 +82,7 @@ app.whenReady().then(() => {
 
   createDatabase()
 
-  createServer()
+  runServer()
 
   createWindow()
 
