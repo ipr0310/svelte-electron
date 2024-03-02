@@ -37,7 +37,7 @@ wss.on('connection', function connection(ws) {
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const runServer = () => {
-  server.listen(5175, () => {
-    console.debug(`server running at http://localhost:5175`)
+  server.listen(4915, () => {
+    console.debug(`server running at http://localhost:4915`)
   })
 }

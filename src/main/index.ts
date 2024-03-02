@@ -1,9 +1,21 @@
-import { app, shell, BrowserWindow, Tray, nativeImage, Menu, ipcMain } from 'electron'
+import {
+  app,
+  shell,
+  BrowserWindow,
+  Tray,
+  nativeImage,
+  Menu,
+  ipcMain,
+  dialog,
+  clipboard,
+  Notification
+} from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import { runServer } from './app'
 import { createDatabase } from './app/db/create'
-import { Notification } from 'electron'
+import childProcess from 'child_process'
+
 import icon from '../../resources/icon.png?asset'
 
 function createWindow(): void {
@@ -34,7 +46,7 @@ function createWindow(): void {
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
     mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
   } else {
-    mainWindow.loadURL('http://localhost:5175/')
+    mainWindow.loadURL('http://localhost:4915/')
   }
 }
 
@@ -53,6 +65,24 @@ app.whenReady().then(() => {
       title: 'Ping',
       body: `Pong - ${process.env['ELECTRON_RENDERER_URL']}`
     }).show()
+  })
+
+  // Dialog test
+  ipcMain.on('dialog', async () => {
+    await dialog
+      .showOpenDialog({ properties: ['openFile', 'dontAddToRecent'] })
+      .then((response) => {
+        const filePath = `"${response.filePaths[0]}"`
+
+        clipboard.writeText(filePath)
+
+        childProcess.exec(`${filePath} -game -bad -modded`)
+
+        new Notification({
+          title: 'Opened File',
+          body: filePath
+        }).show()
+      })
   })
 
   // Set Tray Settings
