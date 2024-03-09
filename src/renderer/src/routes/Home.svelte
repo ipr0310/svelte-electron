@@ -21,28 +21,31 @@
   const emitEvent = (): void => socket.send('Hello World, i am totally fine!')
 </script>
 
-<img alt="logo" class="logo" src={electronLogo} />
-<div class="creator">Powered by electron-vite</div>
-<div class="text">
-  Build an Electron app with
-  <span class="svelte">Svelte</span>
-  and
-  <span class="ts">TypeScript</span>
-</div>
-
-<a href="/author" use:link>Go to author Page</a>
-
-<p class="tip">Please try pressing <code>F12</code> to open the devTool</p>
-<div class="actions">
-  <div class="action">
-    <a href="https://electron-vite.org/" target="_blank" rel="noreferrer">Documentation</a>
+<main class="w-full h-svh flex justify-center items-center flex-col gap-8">
+  <img alt="logo" class="w-40" src={electronLogo} />
+  <div class="creator">Powered by electron-vite</div>
+  <div class="text">
+    Build an Electron app with
+    <span class="svelte">Svelte</span>
+    and
+    <span class="ts">TypeScript</span>
   </div>
-  <div class="action">
-    <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-static-element-interactions a11y-missing-attribute-->
-    <a target="_blank" rel="noreferrer" on:click={ipcPingHandle}>Send Ping IPC</a>
+
+  <a href="/author" use:link class="link link-primary">Go to author Page</a>
+
+  <p class="kbd">Please try pressing F12 to open the devTool</p>
+
+  <div class="actions">
+    <a href="https://electron-vite.org/" target="_blank" rel="noreferrer" class="btn">
+      Documentation
+    </a>
 
     <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-static-element-interactions a11y-missing-attribute-->
-    <a target="_blank" rel="noreferrer" on:click={ipcDialogHandle}>Send Dialog IPC</a>
-    <button on:click={emitEvent}>Emit Event</button>
+    <a target="_blank" rel="noreferrer" on:click={ipcPingHandle} class="btn">Send Ping IPC</a>
+
+    <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-static-element-interactions a11y-missing-attribute-->
+    <a target="_blank" rel="noreferrer" on:click={ipcDialogHandle} class="btn">Send Dialog IPC</a>
+
+    <button on:click={emitEvent} class="btn">Emit Event</button>
   </div>
-</div>
+</main>

@@ -1,4 +1,4 @@
-import './assets/main.css'
+import './assets/tailwind/app.css'
 
 import App from './App.svelte'
 
